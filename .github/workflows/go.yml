@@ -36,5 +36,13 @@ jobs:
     - name: Test
       run: go test -v .
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: Set up Serverless
+      run: npm install -g serverless
+
     - name: Deploy to AWS Lambda
       run: make deploy
