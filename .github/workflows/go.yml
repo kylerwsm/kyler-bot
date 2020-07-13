@@ -36,4 +36,6 @@ jobs:
         go build -v functions/ping/*.go
 
     - name: Test
-      run: go test -v functions/**/*.go
+      run: |
+        go test -v functions/kylerbot/*.go
+        go test -v functions/ping/*.go
