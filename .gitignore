@@ -3,6 +3,9 @@
 
 # Serverless directories
 .serverless
+node_modules
+package.json
+*.lock
 
 # golang output binary directory
 bin

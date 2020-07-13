@@ -35,17 +35,3 @@ jobs:
 
     - name: Test
       run: go test -v functions/**/*.go
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-
-    - name: Set up Serverless
-      run: npm install -g serverless
-
-    - name: Deploy to AWS Lambda
-      run: make deploy
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

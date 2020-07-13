@@ -7,6 +7,9 @@ provider:
   memorySize: 128
   stage: prod
   region: ap-southeast-1
+  environment:
+    SERVICE_NAME: ${self:service}
+    TELEGRAM_BOT_TOKEN: ${env:TELEGRAM_BOT_TOKEN}
   iamRoleStatements:
     - Effect: 'Allow'
       Action:
@@ -16,7 +19,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:ap-southeast-1:646978820291:table/FoodList"
+      Resource: 'arn:aws:dynamodb:ap-southeast-1:646978820291:table/FoodList'
 
 package:
   exclude:
@@ -25,9 +28,26 @@ package:
     - ./bin/**
 
 functions:
+  ping:
+    handler: bin/ping
+    events:
+      - http:
+          path: ping
+          method: get
   kylerbot:
-    handler: bin/main
+    handler: bin/kylerbot
     events:
       - http:
           path: kylerbot
           method: post
+
+plugins:
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: 'api.kylerwong.dev'
+    basePath: 'kyler-bot'
+    stage: ${self:provider.stage}
+    createRoute53Record: false
+    endpointType: 'regional'
