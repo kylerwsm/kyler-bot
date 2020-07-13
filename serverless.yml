@@ -7,6 +7,16 @@ provider:
   memorySize: 128
   stage: prod
   region: ap-southeast-1
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:ap-southeast-1:646978820291:table/FoodList"
 
 package:
   exclude:

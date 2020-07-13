@@ -1,7 +1,7 @@
 .PHONY: build clean deploy
 
 build:
-	env GOOS=linux go build -ldflags="-s -w" -o bin/main *.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/main functions/kylerbot/*.go
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
